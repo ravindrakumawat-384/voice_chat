@@ -11,7 +11,7 @@ from db.database import Document, SessionLocal, User, get_db
 from logger_config import logger
 from models.schemas import DocumentUpload
 from services.pinecone_client import describe_index_stats
-from services.pinecone_service import index_document
+from services.redis_service import index_document
 
 router = APIRouter()
 
@@ -126,7 +126,7 @@ async def test_embedding():
     
     try:
         # Import here to avoid circular imports
-        from services.pinecone_service import get_embedding
+        from services.redis_service import get_embedding
         
         sample_text = "This is a test text to check if embedding generation works correctly."
         embedding = get_embedding(sample_text)

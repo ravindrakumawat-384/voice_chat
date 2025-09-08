@@ -1,0 +1,32 @@
+ # app/db/user_message.yaml
+
+version: "0.1.0"
+
+index:
+  name: user_message_idx
+  prefix: "user_message:"
+  storage_type: json
+
+fields:
+  - name: user_id
+    type: text
+
+  - name: message
+    type: text
+
+  - name: datetime
+    type: text
+
+  - name: user_type
+    type: tag
+
+  - name: embedding
+    type: vector
+    attrs:
+      algorithm: hnsw
+      distance_metric: cosine
+      dtype: float32
+      dims: 1024
+      initial_cap: 128
+      M: 32
+      ef_construction: 200

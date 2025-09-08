@@ -1,0 +1,2 @@
+description: redis simple vector index
+index_name: vec:test

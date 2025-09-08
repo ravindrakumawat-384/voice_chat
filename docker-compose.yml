@@ -1,0 +1,14 @@
+services:
+  redis-server:
+    image: redis/redis-stack:latest   # Includes Redis + Redis Insight (but we'll only use Redis)
+    ports:
+      - "6379:6379"                   # Redis client port
+      - "8001:8001"                   # Optional: only if you want to access Redis Insight FROM container
+    networks:
+      - redis-net
+    # Optional: add a custom command if you want to disable web UI
+    # command: ["redis-server", "--requirepass", "ditstek1236"]
+
+networks:
+  redis-net:
+    driver: bridge

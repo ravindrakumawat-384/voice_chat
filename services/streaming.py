@@ -12,7 +12,7 @@ from config import settings
 from logger_config import logger
 from services.stt import transcribe_audio
 from services.tts import generate_speech
-from services.pinecone_service import retrieve_context, index_transcript
+from services.redis_service import retrieve_context, index_transcript
 from services.llm import generate_response
 from db.database import SessionLocal, get_or_create_user_by_external_id, Chat
 from datetime import datetime
@@ -173,6 +173,7 @@ async def websocket_stream(websocket: WebSocket):
 
         # Retrieve context and generate LLM response using canonical db id
         context = retrieve_context(transcription, user_id)
+        logger.info("Retrieved context for websocket LLM: %s", context)
         response_text = generate_response(transcription, context)
 
         # Optionally generate TTS
